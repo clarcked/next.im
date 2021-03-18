@@ -1,0 +1,11 @@
+#!/bin/bash
+yarn add \
+deepmerge mathjs moment lodash i18n-js howler leaflet leaflet-geosearch react-google-recaptcha react-icons \
+react-leaflet sass socket.io-client sqlite3 \
+next-auth react-hook-form @apollo/client
+
+yarn add --dev \
+@types/deepmerge @types/mathjs @types/moment @types/lodash @types/i18n-js @types/howler @types/leaflet \
+@types/leaflet-geosearch @types/react-google-recaptcha @types/react-icons \
+@types/react-leaflet @types/sass @types/socket.io-client @types/sqlite3
+

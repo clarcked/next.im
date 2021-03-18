@@ -1,0 +1,51 @@
+{
+  "name": "next.im",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.12",
+    "deepmerge": "^4.2.2",
+    "howler": "^2.2.1",
+    "i18n-js": "^3.8.0",
+    "leaflet": "^1.7.1",
+    "leaflet-geosearch": "^3.2.2",
+    "lodash": "^4.17.21",
+    "mathjs": "^9.3.0",
+    "moment": "^2.29.1",
+    "next": "10.0.9",
+    "next-auth": "^3.13.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-google-recaptcha": "^2.1.0",
+    "react-hook-form": "^6.15.4",
+    "react-icons": "^4.2.0",
+    "react-leaflet": "^3.1.0",
+    "sass": "^1.32.8",
+    "socket.io-client": "^4.0.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0",
+    "@types/howler": "^2.2.1",
+    "@types/i18n-js": "^3.8.0",
+    "@types/leaflet": "^1.7.0",
+    "@types/leaflet-geosearch": "^3.0.0",
+    "@types/lodash": "^4.14.168",
+    "@types/mathjs": "^6.0.11",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^14.14.35",
+    "@types/react": "^17.0.3",
+    "@types/react-google-recaptcha": "^2.1.0",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-leaflet": "^2.8.1",
+    "@types/sass": "^1.16.0",
+    "@types/socket.io-client": "^1.4.36",
+    "@types/sqlite3": "^3.1.7",
+    "typescript": "^4.2.3"
+  }
+}
