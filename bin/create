@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir ../app
+mkdir ../app/{plugins,core}
+mkdir ../app/core/{model,manager,link,card,comps,providers}
