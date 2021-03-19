@@ -3,7 +3,7 @@ import { GET_USERS } from "./queries";
 
 export default class UserModel extends BaseModel {
     constructor(props) {
-        super({ ...props, name: "users", tag: "master" });
+        super({ ...props, name: "users", tag: "main" });
     }
 
     async list(gql = null, options?: any) {

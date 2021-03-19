@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { AiOutlineCloudServer } from "react-icons/ai";
 import { IoMdLogOut, IoMdHelpBuoy } from "react-icons/io";
 import { RiDonutChartFill, RiFolder5Line, RiHandCoinLine, RiGroup2Fill, RiSettings4Fill } from "react-icons/ri";
+import Link from "next/link";
 
 class MasterLayout extends Component<any, any> {
     render() {
@@ -12,22 +13,28 @@ class MasterLayout extends Component<any, any> {
                     <nav className="nav nav-top wire-b">
                         <ul className="left">
                             <li>
-                                <a href="/master">
-                                    <span>Master</span>
-                                    <span className="txt-sm pad-x-sm">Dashboard</span>
-                                </a>
+                                <Link href="/master">
+                                    <a>
+                                        <span>Master</span>
+                                        <span className="txt-sm pad-x-sm">Dashboard</span>
+                                    </a>
+                                </Link>
                             </li>
                         </ul>
                         <ul className="right">
                             <li>
-                                <a href="/api/auth/signout" className="is-icon">
-                                    <IoMdLogOut />
-                                </a>
+                                <Link href="/api/auth/signout">
+                                    <a className="is-icon">
+                                        <IoMdLogOut />
+                                    </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/help" className="is-icon">
-                                    <IoMdHelpBuoy />
-                                </a>
+                                <Link href="/helps">
+                                    <a className="is-icon">
+                                        <IoMdHelpBuoy />
+                                    </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
@@ -35,38 +42,50 @@ class MasterLayout extends Component<any, any> {
                         <nav className="nav nav-side nav-left wire-r">
                             <ul className="top">
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <RiDonutChartFill />
-                                    </a>
+                                    <Link href="/master">
+                                        <a className="is-icon">
+                                            <RiDonutChartFill />
+                                        </a>
+                                    </Link>
                                 </li>
                             </ul>
                             <ul className="middle">
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <RiFolder5Line />
-                                    </a>
+                                    <Link href="/master">
+                                        <a className="is-icon">
+                                            <RiFolder5Line />
+                                        </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <AiOutlineCloudServer />
-                                    </a>
+                                    <Link href="/master/hosts">
+                                        <a className="is-icon">
+                                            <AiOutlineCloudServer />
+                                        </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <RiHandCoinLine />
-                                    </a>
+                                    <Link href="/master/invoices">
+                                        <a className="is-icon">
+                                            <RiHandCoinLine />
+                                        </a>
+                                    </Link>
                                 </li>
                             </ul>
                             <ul className="bottom">
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <RiGroup2Fill />
-                                    </a>
+                                    <Link href="/master/users">
+                                        <a className="is-icon">
+                                            <RiGroup2Fill />
+                                        </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="/master" className="is-icon">
-                                        <RiSettings4Fill />
-                                    </a>
+                                    <Link href="/master/settings">
+                                        <a className="is-icon">
+                                            <RiSettings4Fill />
+                                        </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </nav>
