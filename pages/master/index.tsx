@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { MasterLayout } from "../../app/comps/layouts";
 import { getConfigs } from "../../app/core/providers/app";
-import ProjectManager from "../../app/plugins/project/manager";
-import ProjectLink from "../../app/plugins/project/link";
+import { ProjectLink, ProjectList } from "../../app/plugins/project";
 
 class Master extends Component<any, any> {
     render() {
@@ -10,7 +9,7 @@ class Master extends Component<any, any> {
             <MasterLayout {...this.props}>
                 <div className="grid-c-1-a">
                     <div className="rows">
-                        <ProjectManager {...this.props} />
+                        <ProjectList {...this.props} />
                     </div>
                     <nav className="nav nav-side nav-right wire-l">
                         <ul className="top">

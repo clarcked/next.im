@@ -1,7 +1,13 @@
 import { BaseModel } from "../../core";
+import { GET_ENTITIES } from "./queries";
 
 export default class EntityModel extends BaseModel {
     constructor(props) {
-        super({ ...props, name: "entities", tag: "main" });
+        super({ ...props, name: "entities", tag: "master" });
+    }
+
+    async list(gql = null, options?: any) {
+        const res = await super.list(GET_ENTITIES);
+        return res?.entities || [];
     }
 }

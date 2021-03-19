@@ -1,21 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import { VscNewFolder } from "react-icons/vsc";
 import { BaseLink } from "../../core";
-import ProjectManager from "./manager";
+import EntityManager from "./manager";
 
-const ProjectLink = (props: any) => {
-    class Enhanced extends Component<any, any> {
-        render() {
-            const { open } = this.props;
-            return (
-                <a className=" is-icon" onClick={open}>
-                    <VscNewFolder />
-                </a>
-            );
-        }
-    }
-    const Link = BaseLink(Enhanced, { ...props, Manager: ProjectManager });
-    return <Link />;
+const EntityLink = (props: any) => {
+    const { open } = props;
+    return (
+        <a className="is-icon" onClick={open}>
+            <VscNewFolder />
+        </a>
+    );
 };
 
-export default ProjectLink;
+export default BaseLink(EntityLink, { Manager: EntityManager });

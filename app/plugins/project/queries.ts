@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GET_PROJECTS = gql`
-    query GetProjects {
-        projects {
+export const GET_ENTITIES = gql`
+    query GetEntities {
+        entities {
             totalCount
             edges {
                 node {
@@ -18,9 +18,9 @@ export const GET_PROJECTS = gql`
     }
 `;
 
-export const GET_PROJECT = gql`
-    query GetProject($id: ID!) {
-        project(id: $id) {
+export const GET_ENTITY = gql`
+    query GetEntity($id: ID!) {
+        entity(id: $id) {
             id
             _id
             createdAt

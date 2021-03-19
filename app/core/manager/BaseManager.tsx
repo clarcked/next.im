@@ -4,7 +4,7 @@ import merge from "deepmerge";
 const BaseManager = (Enhanced, options: any) =>
     class extends React.Component<any, any> {
         constructor(props: any) {
-            const { Model } = options;
+            const { Model, Card, List } = options;
             super(props);
             this.state = {
                 is_loading: false,
@@ -12,6 +12,8 @@ const BaseManager = (Enhanced, options: any) =>
                 error: null,
                 dependencies: null,
                 Model: Model && new Model(props),
+                List: () => List && <List {...props} />,
+                Card: () => Card && <Card {...props} />,
             };
         }
         componentDidMount() {
@@ -151,6 +153,8 @@ const BaseManager = (Enhanced, options: any) =>
             return (
                 <Enhanced
                     Model={this.state.Model}
+                    Card={this.state.Card}
+                    List={this.state.List}
                     set_error={this.error.bind(this)}
                     load_dependencies={this.load_dependencies.bind(this)}
                     clear={this.clear.bind(this)}

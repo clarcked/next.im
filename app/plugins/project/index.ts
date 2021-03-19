@@ -1,5 +1,7 @@
-import ProjectLink from "./link";
-import ProjectManager from "./manager";
-import ProjectModel from "./model";
+import EntityLink from "./link";
+import EntityManager from "./manager";
+import EntityModel from "./model";
+import EntityCard from "./card";
+import EntityList from "./list";
 
-export { ProjectLink, ProjectManager, ProjectModel };
+export { EntityLink, EntityCard, EntityList, EntityManager, EntityModel };
