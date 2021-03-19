@@ -2,7 +2,10 @@ import React from "react";
 
 export const App = React.createContext<any>({});
 export const AppConsumer = App.Consumer;
-export const AppProvider = App.Provider;
+export const AppProvider = (props: any) => {
+    const { children, config } = props;
+    return <App.Provider value={config}>{children}</App.Provider>;
+};
 export const getConfigs = (ctx: any) => {
     let props: any = {};
     props.rest = {
