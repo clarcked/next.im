@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { MasterLayout } from "../../app/comps/layouts";
 import { getConfigs } from "../../app/core/providers/app";
+import { CategoryLink } from "../../app/plugins/category";
+import { FeatureLink } from "../../app/plugins/feature";
+import { HostLink } from "../../app/plugins/host";
 import { ProjectLink, ProjectList } from "../../app/plugins/project";
+import { UserLink } from "../../app/plugins/user";
 
 class Master extends Component<any, any> {
     render() {
@@ -16,9 +20,19 @@ class Master extends Component<any, any> {
                             <li>
                                 <ProjectLink {...this.props} className="is-icon" />
                             </li>
+                            <li>
+                                <CategoryLink {...this.props} className="is-icon" />
+                            </li>
+                            <li>
+                                <FeatureLink {...this.props} className="is-icon" />
+                            </li>
+                            <li>
+                                <HostLink {...this.props} className="is-icon" />
+                            </li>
+                            <li>
+                                <UserLink {...this.props} className="is-icon" />
+                            </li>
                         </ul>
-                        <ul className="middle"></ul>
-                        <ul className="bottom"></ul>
                     </nav>
                 </div>
             </MasterLayout>

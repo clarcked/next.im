@@ -1,5 +1,5 @@
 import React from "react";
-import { VscNewFolder } from "react-icons/vsc";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { BaseLink } from "../../core";
 import FeatureManager from "./manager";
 
@@ -7,7 +7,7 @@ const FeatureLink = (props: any) => {
     const { open } = props;
     return (
         <a className="is-icon" onClick={open}>
-            <VscNewFolder />
+            <HiOutlineViewGridAdd />
         </a>
     );
 };

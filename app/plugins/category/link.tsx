@@ -1,13 +1,13 @@
 import React from "react";
-import { VscNewFolder } from "react-icons/vsc";
+import { FaSlackHash } from "react-icons/fa";
 import { BaseLink } from "../../core";
 import CategoryManager from "./manager";
 
 const CategoryLink = (props: any) => {
     const { open } = props;
     return (
-        <a className="is-icon" onClick={open}>
-            <VscNewFolder />
+        <a title="category" className="is-icon" onClick={open}>
+            <FaSlackHash />
         </a>
     );
 };
