@@ -6,14 +6,14 @@ class Modal extends Component<any, any> {
         super(props);
     }
     render() {
-        const { is_open, children } = this.props;
+        const { is_open, children, close } = this.props;
         let state = is_open ? "open" : "hide";
         return (
             <div className={`modal ${state}`}>
                 <div className="modal-container">
                     <div className="modal-actions">
                         <div className="modal-action">
-                            <button className="btn btn-icon outline">
+                            <button type="button" className="btn btn-icon outline" onClick={close}>
                                 <MdClose />
                             </button>
                         </div>

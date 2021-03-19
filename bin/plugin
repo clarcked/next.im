@@ -1,0 +1,52 @@
+#!/bin/bash
+PLUGIN_ROOT_DIR="./app/plugins"
+SAMPLE_DIR="./bin/samples/plugin"
+
+
+create_sample(){
+    name=$1
+    cp "$SAMPLE_DIR/$name.txt" "$PLUGIN_DIR/$name"    
+    
+    sed -i 's/entity/$entity/g' "$PLUGIN_DIR/$name"
+    sed -i 's/Entity/$Entity/g' "$PLUGIN_DIR/$name"
+    sed -i 's/entities/$entities/g' "$PLUGIN_DIR/$name"
+    sed -i 's/Entities/$Entities/g' "$PLUGIN_DIR/$name"
+
+    echo "file created: $PLUGIN_DIR/$name"
+}
+
+create_plugin(){
+    continue="y"
+    while ["$continue" === "y"];do
+
+        if [ ! -d "$PLUGIN_ROOT_DIR" ]; then
+            mkdir "$PLUGIN_ROOT_DIR"
+        fi
+
+        echo "Enter plugin name"
+        read name
+        echo "Enter plural form"
+        read plural
+
+        entity=${name,,}
+        entities=${plural,,}
+        Entity=${entity^}
+        ENTITY=${entity^^}
+        Entities=${entities^}
+        ENTITIES=${entities^^}
+
+        PLUGIN_DIR="$PLUGIN_ROOT_DIR/$entities"
+
+        if [ ! -d "$PLUGIN_DIR" ]; then
+            mkdir "$PLUGIN_DIR"
+        fi
+        create_sample "queries.ts"
+        create_sample "manager.tsx"
+        create_sample "link.tsx"
+        create_sample "model.ts"
+        create_sample "index.ts"
+
+        echo "continue ?: y/N"
+        read continue
+    done
+}

@@ -10,6 +10,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.12",
     "deepmerge": "^4.2.2",
+    "graphql": "^15.5.0",
     "howler": "^2.2.1",
     "i18n-js": "^3.8.0",
     "leaflet": "^1.7.1",
@@ -22,7 +23,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-google-recaptcha": "^2.1.0",
-    "react-hook-form": "^6.15.4",
+    "react-hook-form": "^6.15.5",
     "react-icons": "^4.2.0",
     "react-leaflet": "^3.1.0",
     "sass": "^1.32.8",

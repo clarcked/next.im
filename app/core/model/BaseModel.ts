@@ -1,23 +1,32 @@
 import RestHttp from "../http/RestHttp";
 import { ApolloClient } from "@apollo/client";
+import { createApolloClient } from "../providers/apollo";
+import merge from "deepmerge";
 
 export class BaseModel {
-    rest: RestHttp;
+    http: RestHttp;
     apollo: ApolloClient<any>;
     name: string;
     tag: string;
     headers: any;
     data: any;
 
-    constructor({ rest, apollo, name, tag }) {
-        this.rest = rest;
-        this.name = name;
-        this.apollo = apollo;
-        this.tag = tag;
-        this.headers = {
+    constructor({ rest, graphql, name, tag }) {
+        if (!rest || !graphql) console.warn("RestHttp and ApolloClient is required!");
+        if (!tag) console.warn("Project Tag is not defined, default main will be used!", "BaseModel");
+
+        if (typeof rest !== "object") console.warn("invalid rest config");
+        if (typeof graphql !== "object") console.warn("invalid graphql config");
+
+        const headers = {
             "im-project": name,
-            "im-project-tag": tag,
+            "im-project-tag": tag || "main",
         };
+        this.http = new RestHttp({ ...rest, headers: merge(rest?.headers, headers) });
+        this.apollo = createApolloClient({ ...graphql, headers: merge(graphql?.headers, headers) });
+        this.tag = tag;
+        this.name = name;
+        this.headers = headers;
     }
 
     validate = () => true;
@@ -29,7 +38,7 @@ export class BaseModel {
     error = (e: any) => e && console.log(e.message);
 
     find = async (id: string) => {
-        let res = await this.rest.get(id);
+        let res = await this.http.get(id);
         return res.ok ? await res.json() : null;
     };
 
@@ -45,21 +54,21 @@ export class BaseModel {
 
     create = async (options?: any) => {
         if (this.data) {
-            let res = await this.rest.post(this.path(), this.data, options);
+            let res = await this.http.post(this.path(), this.data, options);
             return res.ok ? await res.json() : false;
         }
     };
 
     update = async (options?: any) => {
         if (this.data?.id) {
-            let res = await this.rest.put(this.path(), this.data, options);
+            let res = await this.http.put(this.path(), this.data, options);
             return res.ok ? await res.json() : false;
         }
     };
 
     delete = async (options?: any) => {
         if (this.data?.id) {
-            let res = await this.rest.del(this.path(), options);
+            let res = await this.http.del(this.path(), options);
             return res.ok ? await res.json() : false;
         }
     };

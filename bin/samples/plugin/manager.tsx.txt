@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import BaseManager from "../../core/manager/BaseManager";
-import CategoryModel from "./Model";
+import EntityModel from "./Model";
 
-const CategoryManager = (props) => {
+const EntityManager = (props) => {
     class Enhanced extends Component<any, any> {
         render() {
             const arg = this.props;
             return (
                 <div className="pad">
-                    <div>Category management</div>
+                    <div>Entity management</div>
                 </div>
             );
         }
     }
-    const Manager = BaseManager(Enhanced, { ...props, Model: new CategoryModel(props) });
+    const Manager = BaseManager(Enhanced, { ...props, Model: new EntityModel(props) });
     return <Manager />;
 };
-export default CategoryManager;
+export default EntityManager;

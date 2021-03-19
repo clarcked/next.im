@@ -2,7 +2,7 @@
 yarn add \
 deepmerge mathjs moment lodash i18n-js howler leaflet leaflet-geosearch react-google-recaptcha react-icons \
 react-leaflet sass socket.io-client sqlite3 \
-next-auth react-hook-form @apollo/client
+next-auth react-hook-form @apollo/client graphql
 
 yarn add --dev \
 @types/deepmerge @types/mathjs @types/moment @types/lodash @types/i18n-js @types/howler @types/leaflet \

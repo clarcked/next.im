@@ -9,7 +9,7 @@ export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 
 let apolloClient;
 
-function createApolloClient(arg: any) {
+export function createApolloClient(arg: any) {
     return new ApolloClient({
         ssrMode: typeof window === "undefined",
         link: new HttpLink({
@@ -57,7 +57,7 @@ export function addApolloState(client, pageProps) {
 
 export function useApollo(pageProps) {
     const state = pageProps[APOLLO_STATE_PROP_NAME];
-    const config = pageProps?.graphql;
+    const config = pageProps ? pageProps?.graphql : {};
     const store = useMemo(() => initializeApollo(state, config), [state]);
     return store;
 }

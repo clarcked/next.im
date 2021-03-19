@@ -4,8 +4,9 @@ import merge from "deepmerge";
 const BaseManager = (Enhanced, options: any) =>
     class Manager extends React.Component<any, any> {
         constructor(props: any) {
-            super({ ...props, ...options });
+            super(props);
             this.state = {
+                ...options,
                 is_loading: false,
                 selected: null,
                 error: null,
