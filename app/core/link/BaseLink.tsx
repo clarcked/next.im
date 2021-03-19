@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../comps/modal";
+import Modal from "../../comps/modal";
 
 const BaseLink = (Enhanced, options: any) =>
     class Link extends React.Component<any, any> {

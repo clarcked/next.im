@@ -8,7 +8,7 @@ const ProjectLink = (props: any) => {
         render() {
             const { open } = this.props;
             return (
-                <a className="btn btn-icon has-icon" onClick={open}>
+                <a className=" is-icon" onClick={open}>
                     <FaSlackHash />
                 </a>
             );
