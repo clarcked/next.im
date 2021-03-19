@@ -8,10 +8,13 @@ create_sample(){
 
     file=$1 
     cp "$SAMPLE_DIR/$file.txt" "$PLUGIN_DIR/$file"    
+    
     sed -i "s/entity/$entity/g" "$PLUGIN_DIR/$file"
     sed -i "s/Entity/$Entity/g" "$PLUGIN_DIR/$file"
+    sed -i "s/ENTITY/$ENTITY/g" "$PLUGIN_DIR/$file"
     sed -i "s/entities/$entities/g" "$PLUGIN_DIR/$file"
     sed -i "s/Entities/$Entities/g" "$PLUGIN_DIR/$file"
+    sed -i "s/ENTITIES/$ENTITIES/g" "$PLUGIN_DIR/$file"
 
     echo "file created: $PLUGIN_DIR/$file"
 }
@@ -43,10 +46,10 @@ create_plugin(){
         fi
 
         create_sample "queries.ts" 
-        create_sample "manager.tsx"  
-        create_sample "link.tsx" 
-        create_sample "model.ts"  
-        create_sample "index.ts" 
+        # create_sample "manager.tsx"  
+        # create_sample "link.tsx" 
+        # create_sample "model.ts"  
+        # create_sample "index.ts" 
 
         echo "continue ?: y/N"
         read continue

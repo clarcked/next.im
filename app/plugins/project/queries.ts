@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ENTITIES = gql`
+export const GET_PROJECTS = gql`
     query GetProjects {
         projects {
             totalCount
@@ -18,7 +18,7 @@ export const GET_ENTITIES = gql`
     }
 `;
 
-export const GET_ENTITY = gql`
+export const GET_PROJECT = gql`
     query GetProject($id: ID!) {
         project(id: $id) {
             id

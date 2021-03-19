@@ -29,47 +29,55 @@ export class BaseModel {
         this.headers = headers;
     }
 
-    validate = () => true;
+    validate() {
+        return true;
+    }
 
-    hydrate = (arg: any) => typeof arg === "object" && this.data;
+    hydrate(arg: any) {
+        typeof arg === "object" && this.data;
+    }
 
-    path = () => `/api/${this.name}${this.data?.id ? `/${this.data.id}` : ""}`;
+    path() {
+        return `/api/${this.name}${this.data?.id ? `/${this.data.id}` : ""}`;
+    }
 
-    error = (e: any) => e && console.log(e.message);
+    error(e: any) {
+        e && console.log(e.message);
+    }
 
-    find = async (id: string) => {
+    async find(id: string) {
         let res = await this.http.get(id);
         return res.ok ? await res.json() : null;
-    };
+    }
 
-    list = async (gql: any, vars?: any) => {
+    async list(gql: any, vars?: any) {
         let res = await this.apollo.query({ query: gql, variables: vars, context: { headers: this.headers } });
         return res?.data;
-    };
+    }
 
-    query = async (gql: any, vars?: any) => {
+    async query(gql: any, vars?: any) {
         let res = await this.apollo.query({ query: gql, variables: vars, context: { headers: this.headers } });
         return res?.data;
-    };
+    }
 
-    create = async (options?: any) => {
+    async create(options?: any) {
         if (this.data) {
             let res = await this.http.post(this.path(), this.data, options);
             return res.ok ? await res.json() : false;
         }
-    };
+    }
 
-    update = async (options?: any) => {
+    async update(options?: any) {
         if (this.data?.id) {
             let res = await this.http.put(this.path(), this.data, options);
             return res.ok ? await res.json() : false;
         }
-    };
+    }
 
-    delete = async (options?: any) => {
+    async delete(options?: any) {
         if (this.data?.id) {
             let res = await this.http.del(this.path(), options);
             return res.ok ? await res.json() : false;
         }
-    };
+    }
 }

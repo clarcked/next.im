@@ -32,7 +32,7 @@ class MasterLayout extends Component<any, any> {
                         </ul>
                     </nav>
                     <section className="grid-c-a-1">
-                        <nav className="nav nav-left wire-r">
+                        <nav className="nav nav-side nav-left wire-r">
                             <ul className="top">
                                 <li>
                                     <a href="/master" className="is-icon">
@@ -71,7 +71,7 @@ class MasterLayout extends Component<any, any> {
                             </ul>
                         </nav>
                         <div className="grid-r-1-a">
-                            <div className="rows ">{children}</div>
+                            <div className="rows">{children}</div>
                             <div className="footer wire-t">
                                 <div className="txt-sm">&copy; InMarketify 2021</div>
                             </div>

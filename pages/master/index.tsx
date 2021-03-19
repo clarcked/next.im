@@ -10,12 +10,9 @@ class Master extends Component<any, any> {
             <MasterLayout {...this.props}>
                 <div className="grid-c-1-a">
                     <div className="rows">
-                        <div className="pad">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto tenetur veritatis, incidunt modi nihil commodi minus nulla repellat voluptatum, necessitatibus labore
-                            itaque accusamus quibusdam maiores quas dolor eum voluptatem expedita!
-                        </div>
+                        <ProjectManager {...this.props} />
                     </div>
-                    <nav className="nav nav-left wire-l">
+                    <nav className="nav nav-side nav-right wire-l">
                         <ul className="top">
                             <li>
                                 <ProjectLink {...this.props} className="is-icon" />

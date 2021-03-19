@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FaSlackHash } from "react-icons/fa";
+import { VscNewFolder } from "react-icons/vsc";
 import { BaseLink } from "../../core";
 import ProjectManager from "./manager";
 
@@ -9,7 +9,7 @@ const ProjectLink = (props: any) => {
             const { open } = this.props;
             return (
                 <a className=" is-icon" onClick={open}>
-                    <FaSlackHash />
+                    <VscNewFolder />
                 </a>
             );
         }

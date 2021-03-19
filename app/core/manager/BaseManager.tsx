@@ -2,36 +2,34 @@ import React from "react";
 import merge from "deepmerge";
 
 const BaseManager = (Enhanced, options: any) =>
-    class Manager extends React.Component<any, any> {
+    class extends React.Component<any, any> {
         constructor(props: any) {
+            const { Model } = options;
             super(props);
             this.state = {
-                ...options,
                 is_loading: false,
                 selected: null,
                 error: null,
                 dependencies: null,
+                Model: Model && new Model(props),
             };
         }
-        async componentDidMount() {
+        componentDidMount() {
             const { on_mount } = this.props;
             if (typeof on_mount === "function") {
-                await on_mount();
             }
-            await this.load_dependencies();
         }
-        async componentWillUnmount() {
+        componentWillUnmount() {
             const { on_unmount } = this.props;
             if (typeof on_unmount === "function") {
-                await on_unmount();
             }
         }
 
         async load_dependencies() {
-            const { load_dependencies } = this.props;
-            if (typeof load_dependencies === "function") {
-                const dependencies = await load_dependencies();
-                this.setState({ dependencies });
+            const { load_dependencies, Model } = this.props;
+            if (typeof load_dependencies === "function" && typeof Model === "object") {
+                const data = await load_dependencies(Model, this.error.bind(this));
+                this.setState({ dependencies: data });
             }
         }
 
@@ -78,8 +76,8 @@ const BaseManager = (Enhanced, options: any) =>
 
         can_query() {
             let is_ok = true;
-            const { model } = this.props;
-            is_ok = typeof model === "object";
+            const { Model } = this.state;
+            is_ok = typeof Model === "object";
             return is_ok;
         }
 
@@ -97,40 +95,40 @@ const BaseManager = (Enhanced, options: any) =>
 
         async list() {
             if (this.can_query()) {
-                const { model } = this.props;
-                const data = await model?.list();
+                const { Model } = this.state;
+                const data = await Model?.list();
                 return data;
             }
         }
         async find(arg: any) {
             if (this.can_query()) {
-                const { model } = this.props;
-                const data = await model?.find(arg);
+                const { Model } = this.state;
+                const data = await Model?.find(arg);
                 return data;
             }
         }
         async create(arg: any) {
             if (this.can_create(arg)) {
-                const { model } = this.props;
+                const { Model } = this.state;
                 const next = await this.pre_persist(arg);
-                const data = await model?.create(merge(arg, next));
+                const data = await Model?.create(merge(arg, next));
                 const after = await this.post_persist(data);
                 return merge(data, after);
             }
         }
         async update(arg: any) {
             if (this.can_update(arg)) {
-                const { model } = this.props;
+                const { Model } = this.state;
                 const next = await this.pre_update(arg);
-                const data = await model?.update(merge(arg, next));
+                const data = await Model?.update(merge(arg, next));
                 const after = await this.post_update(data);
                 return merge(data, after);
             }
         }
         async remove(arg: any) {
             if (this.can_update(arg)) {
-                const { model } = this.props;
-                const data = await model?.delete(arg);
+                const { Model } = this.state;
+                const data = await Model?.delete(arg);
                 const after = await this.post_remove(data);
                 return merge(data, after);
             }
@@ -152,9 +150,9 @@ const BaseManager = (Enhanced, options: any) =>
         render() {
             return (
                 <Enhanced
-                    {...this.props}
-                    {...this.state}
+                    Model={this.state.Model}
                     set_error={this.error.bind(this)}
+                    load_dependencies={this.load_dependencies.bind(this)}
                     clear={this.clear.bind(this)}
                     select={this.select.bind(this)}
                     submit={this.submit.bind(this)}
