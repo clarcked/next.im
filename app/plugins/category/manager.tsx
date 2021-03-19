@@ -1,19 +1,25 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { BaseManager } from "../../core";
 import CategoryModel from "./model";
 
-const CategoryManager = (props) => {
-    class Enhanced extends Component<any, any> {
-        render() {
-            const arg = this.props;
-            return (
-                <div className="pad">
-                    <div>Category management</div>
-                </div>
-            );
-        }
-    }
-    const Manager = BaseManager(Enhanced, { ...props, Model: new CategoryModel(props) });
-    return <Manager />;
+const CategoryManager = (props: any) => {
+    const { Model } = props;
+    const [categories, set_categories] = useState<any[]>([]);
+    const fetch = () => {
+        Model.list()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {});
+    };
+    useEffect(() => {
+        fetch();
+    }, []);
+    return (
+        <div>
+            <div className="pad">Category Manager</div>
+        </div>
+    );
 };
-export default CategoryManager;
+
+export default BaseManager(CategoryManager, { Model: CategoryModel });

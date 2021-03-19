@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ENTITIES = gql`
+export const GET_CATEGORIES = gql`
     query GetCategories {
         categories {
             totalCount
@@ -18,7 +18,7 @@ export const GET_ENTITIES = gql`
     }
 `;
 
-export const GET_ENTITY = gql`
+export const GET_CATEGORY = gql`
     query GetCategory($id: ID!) {
         category(id: $id) {
             id

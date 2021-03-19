@@ -46,10 +46,12 @@ create_plugin(){
         fi
 
         create_sample "queries.ts" 
-        # create_sample "manager.tsx"  
-        # create_sample "link.tsx" 
-        # create_sample "model.ts"  
-        # create_sample "index.ts" 
+        create_sample "manager.tsx"  
+        create_sample "link.tsx" 
+        create_sample "card.tsx" 
+        create_sample "list.tsx" 
+        create_sample "model.ts"  
+        create_sample "index.ts" 
 
         echo "continue ?: y/N"
         read continue

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ENTITIES = gql`
+export const GET_HOSTS = gql`
     query GetHosts {
         hosts {
             totalCount
@@ -18,7 +18,7 @@ export const GET_ENTITIES = gql`
     }
 `;
 
-export const GET_ENTITY = gql`
+export const GET_HOST = gql`
     query GetHost($id: ID!) {
         host(id: $id) {
             id

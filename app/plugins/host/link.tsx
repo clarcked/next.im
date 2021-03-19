@@ -1,21 +1,15 @@
-import React, { Component } from "react";
-import { FaSlackHash } from "react-icons/fa";
+import React from "react";
+import { VscNewFolder } from "react-icons/vsc";
 import { BaseLink } from "../../core";
 import HostManager from "./manager";
 
 const HostLink = (props: any) => {
-    class Enhanced extends Component<any, any> {
-        render() {
-            const { open } = this.props;
-            return (
-                <a className=" is-icon" onClick={open}>
-                    <FaSlackHash />
-                </a>
-            );
-        }
-    }
-    const Link = BaseLink(Enhanced, { ...props, Manager: HostManager });
-    return <Link />;
+    const { open } = props;
+    return (
+        <a className="is-icon" onClick={open}>
+            <VscNewFolder />
+        </a>
+    );
 };
 
-export default HostLink;
+export default BaseLink(HostLink, { Manager: HostManager });

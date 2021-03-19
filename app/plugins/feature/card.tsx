@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RiFolderSharedLine } from "react-icons/ri";
 import { BaseManager } from "../../core";
-import ProjectModel from "./model";
+import FeatureModel from "./model";
 
-const ProjectCard = (props: any) => {
+const FeatureCard = (props: any) => {
     const { Model } = props;
-    const [projects, set_projects] = useState<any[]>([]);
+    const [features, set_features] = useState<any[]>([]);
     const fetch = () => {
         Model.list()
             .then((res) => {
@@ -22,7 +22,7 @@ const ProjectCard = (props: any) => {
                 <figure className="thumb outline">
                     <img src="https://fakeimg.pl/600x600" alt="card image" />
                 </figure>
-                <div className="title txt-c">Project Name</div>
+                <div className="title txt-c">Feature Name</div>
                 <div className="description txt-c">A quick description about.</div>
             </div>
             <div className="card-footer">
@@ -38,4 +38,4 @@ const ProjectCard = (props: any) => {
     );
 };
 
-export default BaseManager(ProjectCard, { Model: ProjectModel });
+export default BaseManager(FeatureCard, { Model: FeatureModel });

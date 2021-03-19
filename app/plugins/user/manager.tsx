@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BaseManager } from "../../core";
-import ProjectModel from "./model";
+import UserModel from "./model";
 
-const ProjectManager = (props: any) => {
+const UserManager = (props: any) => {
     const { Model } = props;
-    const [projects, set_projects] = useState<any[]>([]);
+    const [users, set_users] = useState<any[]>([]);
     const fetch = () => {
         Model.list()
             .then((res) => {
@@ -17,9 +17,9 @@ const ProjectManager = (props: any) => {
     }, []);
     return (
         <div>
-            <div className="pad">Project Manager</div>
+            <div className="pad">User Manager</div>
         </div>
     );
 };
 
-export default BaseManager(ProjectManager, { Model: ProjectModel });
+export default BaseManager(UserManager, { Model: UserModel });

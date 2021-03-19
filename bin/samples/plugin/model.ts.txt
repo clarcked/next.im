@@ -8,6 +8,6 @@ export default class EntityModel extends BaseModel {
 
     async list(gql = null, options?: any) {
         const res = await super.list(GET_ENTITIES);
-        return res?.entities || [];
+        return res?.entities || {};
     }
 }

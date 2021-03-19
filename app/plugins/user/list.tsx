@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { BaseManager } from "../../core";
-import ProjectModel from "./model";
-import ProjectCard from "./card";
+import UserModel from "./model";
+import UserCard from "./card";
 
-const ProjectList = (props: any) => {
+const UserList = (props: any) => {
     const { Model, Card } = props;
-    const [projects, set_projects] = useState<any>([]);
+    const [users, set_users] = useState<any>([]);
     const fetch = () => {
         Model.list()
             .then((res) => {
-                set_projects(res?.edges);
+                set_users(res?.edges);
             })
             .catch((e) => {});
     };
@@ -19,13 +19,13 @@ const ProjectList = (props: any) => {
 
     return (
         <div className="rows j-center gap pad scroll">
-            {projects?.edges?.map((project, idx) => (
+            {users?.edges?.map((user, idx) => (
                 <div key={idx} className="col-2">
-                    <Card data={project} />
+                    <Card data={user} />
                 </div>
             ))}
         </div>
     );
 };
 
-export default BaseManager(ProjectList, { Model: ProjectModel, Card: ProjectCard });
+export default BaseManager(UserList, { Model: UserModel, Card: UserCard });

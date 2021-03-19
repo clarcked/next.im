@@ -1,9 +1,9 @@
 import React from "react";
 import { VscNewFolder } from "react-icons/vsc";
 import { BaseLink } from "../../core";
-import EntityManager from "./manager";
+import ProjectManager from "./manager";
 
-const EntityLink = (props: any) => {
+const ProjectLink = (props: any) => {
     const { open } = props;
     return (
         <a className="is-icon" onClick={open}>
@@ -12,4 +12,4 @@ const EntityLink = (props: any) => {
     );
 };
 
-export default BaseLink(EntityLink, { Manager: EntityManager });
+export default BaseLink(ProjectLink, { Manager: ProjectManager });
