@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { FaSlackHash } from "react-icons/fa";
-import BaseLink from "../../core/link/BaseLink";
-import CategoryManager from "./Manager";
+import { BaseLink } from "../../core";
+import FeatureManager from "./manager";
 
-const CategoryLink = (props: any) => {
+const FeatureLink = (props: any) => {
     class Enhanced extends Component<any, any> {
         render() {
             const { open } = this.props;
@@ -14,8 +14,8 @@ const CategoryLink = (props: any) => {
             );
         }
     }
-    const Link = BaseLink(Enhanced, { ...props, Manager: CategoryManager });
+    const Link = BaseLink(Enhanced, { ...props, Manager: FeatureManager });
     return <Link />;
 };
 
-export default CategoryLink;
+export default FeatureLink;

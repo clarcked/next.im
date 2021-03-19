@@ -1,4 +1,4 @@
-import { BaseModel } from "../../core/model/BaseModel";
+import { BaseModel } from "../../core";
 
 export default class CategoryModel extends BaseModel {
     constructor(props) {

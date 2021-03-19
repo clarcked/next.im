@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_ENTITIES = gql`
-    query GetCategories {
-        categories {
+    query GetTags {
+        tags {
             totalCount
             edges {
                 node {
@@ -19,8 +19,8 @@ export const GET_ENTITIES = gql`
 `;
 
 export const GET_ENTITY = gql`
-    query GetCategory($id: ID!) {
-        category(id: $id) {
+    query GetTag($id: ID!) {
+        tag(id: $id) {
             id
             _id
             createdAt

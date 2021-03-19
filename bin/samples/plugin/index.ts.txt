@@ -1,5 +1,5 @@
-import EntityLink from "./Link";
-import EntityManager from "./Manager";
-import EntityModel from "./Model";
+import EntityLink from "./link";
+import EntityManager from "./manager";
+import EntityModel from "./model";
 
 export { EntityLink, EntityManager, EntityModel };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import BaseManager from "../../core/manager/BaseManager";
-import CategoryModel from "./Model";
+import { BaseManager } from "../../core";
+import CategoryModel from "./model";
 
 const CategoryManager = (props) => {
     class Enhanced extends Component<any, any> {

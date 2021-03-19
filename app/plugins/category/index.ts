@@ -1,5 +1,5 @@
-import CategoryLink from "./Link";
-import CategoryManager from "./Manager";
-import CategoryModel from "./Model";
+import CategoryLink from "./link";
+import CategoryManager from "./manager";
+import CategoryModel from "./model";
 
 export { CategoryLink, CategoryManager, CategoryModel };

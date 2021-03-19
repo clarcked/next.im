@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { FaSlackHash } from "react-icons/fa";
 import { BaseLink } from "../../core";
-import EntityManager from "./manager";
+import CategoryManager from "./manager";
 
-const EntityLink = (props: any) => {
+const CategoryLink = (props: any) => {
     class Enhanced extends Component<any, any> {
         render() {
             const { open } = this.props;
@@ -14,8 +14,8 @@ const EntityLink = (props: any) => {
             );
         }
     }
-    const Link = BaseLink(Enhanced, { ...props, Manager: EntityManager });
+    const Link = BaseLink(Enhanced, { ...props, Manager: CategoryManager });
     return <Link />;
 };
 
-export default EntityLink;
+export default CategoryLink;
