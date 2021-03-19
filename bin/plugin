@@ -40,6 +40,7 @@ create_plugin(){
         if [ ! -d "$PLUGIN_DIR" ]; then
             mkdir "$PLUGIN_DIR"
         fi
+
         create_sample "queries.ts"
         create_sample "manager.tsx"
         create_sample "link.tsx"
@@ -50,3 +51,5 @@ create_plugin(){
         read continue
     done
 }
+
+create_plugin
