@@ -8,9 +8,7 @@ const ProjectCard = (props: any) => {
     const [projects, set_projects] = useState<any[]>([]);
     const fetch = () => {
         Model.list()
-            .then((res) => {
-                console.log(res);
-            })
+            .then((res) => {})
             .catch((e) => {});
     };
     useEffect(() => {

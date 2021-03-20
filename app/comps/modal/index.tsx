@@ -18,7 +18,7 @@ class Modal extends Component<any, any> {
                             </button>
                         </div>
                     </div>
-                    <section>{children}</section>
+                    <section className="no-scroll">{children}</section>
                 </div>
             </div>
         );

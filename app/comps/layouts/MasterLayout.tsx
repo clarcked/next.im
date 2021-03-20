@@ -23,16 +23,16 @@ class MasterLayout extends Component<any, any> {
                         </ul>
                         <ul className="right">
                             <li>
-                                <Link href="/api/auth/signout">
+                                <Link href="/helps">
                                     <a className="is-icon">
-                                        <IoMdLogOut />
+                                        <IoMdHelpBuoy />
                                     </a>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/helps">
+                                <Link href="/api/auth/signout">
                                     <a className="is-icon">
-                                        <IoMdHelpBuoy />
+                                        <IoMdLogOut />
                                     </a>
                                 </Link>
                             </li>
