@@ -22,6 +22,7 @@ export class BaseModel {
             "im-project": name,
             "im-project-tag": tag || "main",
         };
+
         this.http = new RestHttp({ ...rest, headers: merge(rest?.headers, headers) });
         this.apollo = createApolloClient({ ...graphql, headers: merge(graphql?.headers, headers) });
         this.tag = tag;
@@ -34,7 +35,7 @@ export class BaseModel {
     }
 
     hydrate(arg: any) {
-        typeof arg === "object" && this.data;
+        if (typeof arg === "object") this.data = arg;
     }
 
     path() {

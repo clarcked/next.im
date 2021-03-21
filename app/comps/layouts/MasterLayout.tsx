@@ -8,8 +8,8 @@ class MasterLayout extends Component<any, any> {
     render() {
         const { children } = this.props;
         return (
-            <div className="grid-c-1-a">
-                <div className="grid-r-a-1">
+            <div className="h-expand grid-c-1-a">
+                <div className="h-expand grid-r-a-1">
                     <nav className="nav nav-top wire-b">
                         <ul className="left">
                             <li>
@@ -38,7 +38,7 @@ class MasterLayout extends Component<any, any> {
                             </li>
                         </ul>
                     </nav>
-                    <section className="grid-c-a-1">
+                    <section className="h-expand grid-c-a-1">
                         <nav className="nav nav-side nav-left wire-r">
                             <ul className="top">
                                 <li>
@@ -89,7 +89,7 @@ class MasterLayout extends Component<any, any> {
                                 </li>
                             </ul>
                         </nav>
-                        <div className="grid-r-1-a">
+                        <div className="h-expand grid-r-1-a">
                             <div className="rows">{children}</div>
                             <div className="footer wire-t">
                                 <div className="txt-sm">&copy; InMarketify 2021</div>

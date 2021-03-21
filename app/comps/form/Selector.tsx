@@ -80,7 +80,7 @@ class Selector extends Component<TextInputType, { selected: any; is_open: boolea
         const icon = Left || Right ? "has-icon" : "";
         const is_open = this.state.is_open ? "selector-open" : "selector-closed";
         return (
-            <div ref={this.ref} className={`field selector ${is_open} margin-b ${className || ""}`}>
+            <div ref={this.ref} className={`field selector ${is_open} ${className || ""}`}>
                 <div className={`control ${icon}`}>
                     {Left && <div className="left">{<Left />}</div>}
                     <input onFocus={this.handleFocus.bind(this)} defaultValue={this.getName(this.state.selected)} placeholder={placeholder} className={`input ${className || ""}`} type="text"></input>

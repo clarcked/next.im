@@ -1,5 +1,3 @@
-import merge from "deepmerge";
-
 export default class RestHttp {
     private base_url: any;
     private headers: any;
@@ -22,12 +20,14 @@ export default class RestHttp {
     options = (arg: any) => {
         let options: any = {};
         options.headers = this.headers;
-        return merge(options, arg);
+        return { ...options, ...arg };
     };
 
     request = async (args: any) => {
         try {
-            return await fetch(this.url(args?.path), this.options(args));
+            const resp = await fetch(this.url(args?.path), this.options(args));
+            console.log(resp);
+            return resp;
         } catch (error) {
             this.error(error);
         }

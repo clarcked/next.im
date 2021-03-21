@@ -1,5 +1,4 @@
 import React from "react";
-import merge from "deepmerge";
 
 const BaseManager = (Enhanced, options: any) =>
     class extends React.Component<any, any> {
@@ -86,6 +85,7 @@ const BaseManager = (Enhanced, options: any) =>
         can_create(arg: any) {
             let is_ok = this.can_query();
             is_ok = typeof arg === "object";
+            console.log(is_ok, "to create entity");
             return is_ok;
         }
 
@@ -112,19 +112,21 @@ const BaseManager = (Enhanced, options: any) =>
         async create(arg: any) {
             if (this.can_create(arg)) {
                 const { Model } = this.state;
+                console.log(arg, "base manager create");
                 const next = await this.pre_persist(arg);
-                const data = await Model?.create(merge(arg, next));
+                Model?.hydrate({ ...arg, ...next });
+                const data = await Model?.create();
                 const after = await this.post_persist(data);
-                return merge(data, after);
+                return { ...data, ...after };
             }
         }
         async update(arg: any) {
             if (this.can_update(arg)) {
                 const { Model } = this.state;
                 const next = await this.pre_update(arg);
-                const data = await Model?.update(merge(arg, next));
+                const data = await Model?.update({ ...arg, ...next });
                 const after = await this.post_update(data);
-                return merge(data, after);
+                return { ...data, ...after };
             }
         }
         async remove(arg: any) {
@@ -132,13 +134,13 @@ const BaseManager = (Enhanced, options: any) =>
                 const { Model } = this.state;
                 const data = await Model?.delete(arg);
                 const after = await this.post_remove(data);
-                return merge(data, after);
+                return { ...data, ...after };
             }
         }
 
         async submit(data: any) {
             const { selected } = this.state;
-            return selected?.id ? await this.update(merge(selected, data)) : await this.create(data);
+            return selected?.id ? await this.update({ ...data, ...selected }) : await this.create(data);
         }
 
         select(arg: any) {

@@ -11,7 +11,7 @@ class Master extends Component<any, any> {
     render() {
         return (
             <MasterLayout {...this.props}>
-                <div className="grid-c-1-a">
+                <div className="grid-c-1-a h-expand">
                     <div className="rows">
                         <ProjectList {...this.props} />
                     </div>

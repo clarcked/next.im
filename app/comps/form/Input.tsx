@@ -6,7 +6,7 @@ class Input extends Component<TextInputType, any> {
         const { options, Left, Right, children, className } = this.props;
         const icon = Left || Right ? "has-icon" : "";
         return (
-            <div className={`field margin-b ${className || ""}`}>
+            <div className={`field ${className || ""}`}>
                 <div className={`control ${icon}`}>
                     {Left && <div className="left">{<Left />}</div>}
                     {children}
