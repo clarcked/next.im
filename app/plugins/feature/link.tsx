@@ -12,4 +12,4 @@ const FeatureLink = (props: any) => {
     );
 };
 
-export default BaseLink(FeatureLink, { Manager: FeatureManager });
+export default BaseLink(FeatureLink, { Manager: FeatureManager, className: "w-300" });

@@ -12,4 +12,4 @@ const CategoryLink = (props: any) => {
     );
 };
 
-export default BaseLink(CategoryLink, { Manager: CategoryManager });
+export default BaseLink(CategoryLink, { Manager: CategoryManager, className: "w-300" });
