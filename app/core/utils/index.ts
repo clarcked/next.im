@@ -13,6 +13,10 @@ export function sanitize(obj: any) {
     return finalObj;
 }
 
+export function is_iri(id:string){
+    return new RegExp(`\/`).test(id)
+}
+
 export function flink(file, scheme = "http") {
     return typeof file === "object" ? `${scheme}://${file?.host}/${file?.dir}/${file?.filename}` : file;
 }

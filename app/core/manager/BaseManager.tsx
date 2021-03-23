@@ -85,7 +85,6 @@ const BaseManager = (Enhanced, options: any) =>
         can_create(arg: any) {
             let is_ok = this.can_query();
             is_ok = typeof arg === "object";
-            console.log(is_ok, "to create entity");
             return is_ok;
         }
 
@@ -95,21 +94,22 @@ const BaseManager = (Enhanced, options: any) =>
             return is_ok;
         }
 
-        async list() {
+        async list(callback?: (arg?: any) => {}) {
             if (this.can_query()) {
                 const { Model } = this.state;
                 const data = await Model?.list();
+                callback && callback(data);
                 return data;
             }
         }
-        async find(arg: any) {
+        async find(arg: any, callback?: (arg?: any) => {}) {
             if (this.can_query()) {
                 const { Model } = this.state;
                 const data = await Model?.find(arg);
                 return data;
             }
         }
-        async create(arg: any) {
+        async create(arg: any, callback?: (arg?: any) => {}) {
             if (this.can_create(arg)) {
                 const { Model } = this.state;
                 console.log(arg, "base manager create");
@@ -117,30 +117,38 @@ const BaseManager = (Enhanced, options: any) =>
                 Model?.hydrate({ ...arg, ...next });
                 const data = await Model?.create();
                 const after = await this.post_persist(data);
-                return { ...data, ...after };
+                const res = { ...data, ...after };
+                callback && callback(res);
+                return res;
             }
         }
-        async update(arg: any) {
+        async update(arg: any, callback?: (arg?: any) => {}) {
             if (this.can_update(arg)) {
                 const { Model } = this.state;
                 const next = await this.pre_update(arg);
-                const data = await Model?.update({ ...arg, ...next });
+                Model?.hydrate({ ...arg, ...next });
+                const data = await Model?.update();
                 const after = await this.post_update(data);
-                return { ...data, ...after };
+                const res = { ...data, ...after };
+                callback && callback(res);
+                return res;
             }
         }
-        async remove(arg: any) {
+        async remove(arg: any, callback?: (arg?: any) => {}) {
             if (this.can_update(arg)) {
                 const { Model } = this.state;
+                Model?.hydrate(arg);
                 const data = await Model?.delete(arg);
                 const after = await this.post_remove(data);
-                return { ...data, ...after };
+                const res = { ...data, ...after };
+                callback && callback(res);
+                return res;
             }
         }
 
-        async submit(data: any) {
+        async submit(data: any, callback?: (arg?: any) => {}) {
             const { selected } = this.state;
-            return selected?.id ? await this.update({ ...data, ...selected }) : await this.create(data);
+            return selected?.id ? await this.update({ ...data, ...selected }, callback) : await this.create(data, callback);
         }
 
         select(arg: any) {

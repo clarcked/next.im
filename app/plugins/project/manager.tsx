@@ -27,10 +27,25 @@ const CollabField = ({ register, remove, field }) => {
 };
 const CollabFields = ({ fields, remove, register }) => (fields ? fields?.map((field, i) => <CollabField register={register} key={i} field={field} remove={remove} />) : <div />);
 const ProjectManager = (props: any) => {
-    const { submit } = props;
+    const { submit, Model } = props;
     const { handleSubmit, register } = useForm();
     const [collabs, set_collabs] = useState<Array<{ name: any }>>([]);
-    const fetch = () => {};
+    const [hosts, set_hosts] = useState<any>([]);
+    const [categories, set_categories] = useState<any>([]);
+    const [features, set_features] = useState<any>([]);
+
+    const fetch = async () => {
+        try {
+            const hosts = await Model.hosts();
+            const categories = await Model.categories();
+            const features = await Model.features();
+            set_hosts(hosts?.edges);
+            set_features(features?.egdes);
+            set_categories(categories?.egdes);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const onSubmit = async (data: any) => {
         try {
@@ -55,7 +70,7 @@ const ProjectManager = (props: any) => {
 
     useEffect(() => {
         fetch();
-    }, [collabs]);
+    }, []);
 
     return (
         <form className="pad no-pad-t form h-expand grid-r-1-a" onSubmit={handleSubmit(onSubmit)}>
@@ -68,30 +83,10 @@ const ProjectManager = (props: any) => {
                         <Selector options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
                     </div>
                     <div className="col-auto">
-                        <Selector
-                            options={[
-                                { name: "Buenos Aires", id: "/api/hosts/2" },
-                                { name: "Haiti", id: "/api/hosts/1" },
-                            ]}
-                            map="id"
-                            Left={FaServer}
-                            register={register}
-                            name="host"
-                            placeholder="Select Host"
-                        />
+                        <Selector options={hosts} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
                     </div>
                     <div className="col-auto">
-                        <Selector
-                            options={[
-                                { name: "Commerce", id: "/api/categories/2" },
-                                { name: "Services", id: "/api/categories/1" },
-                            ]}
-                            map="id"
-                            Left={FaSlackHash}
-                            register={register}
-                            name="category"
-                            placeholder="Select Category"
-                        />
+                        <Selector options={categories} map="id" Left={FaSlackHash} register={register} name="category" placeholder="Select Category" />
                     </div>
                 </div>
                 <div className="margin-b">
@@ -100,18 +95,14 @@ const ProjectManager = (props: any) => {
                 </div>
                 <CollabFields fields={collabs} remove={rem_collab} register={register} />
                 <div className="checkboxes">
-                    <div className="field checkbox">
-                        <label>
-                            <input ref={register} type="checkbox" defaultValue={`/api/features/1`} name="features[]" />
-                            <div className="label">E-Commerce</div>
-                        </label>
-                    </div>
-                    <div className="field checkbox">
-                        <label>
-                            <input ref={register} type="checkbox" defaultValue={`/api/features/2`} name="features[]" />
-                            <div className="label">Services</div>
-                        </label>
-                    </div>
+                    {features?.map((feature, idx) => (
+                        <div key={idx} className="field checkbox">
+                            <label>
+                                <input ref={register} type="checkbox" defaultValue={feature?.id} name="features[]" />
+                                <div className="label">{feature.name}</div>
+                            </label>
+                        </div>
+                    ))}
                 </div>
                 <div className="field radiobox margin-b">
                     <label>

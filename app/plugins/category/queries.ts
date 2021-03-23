@@ -12,6 +12,7 @@ export const GET_CATEGORIES = gql`
                     modifiedAt
                     status
                     note
+                    name
                 }
             }
         }
@@ -27,6 +28,7 @@ export const GET_CATEGORY = gql`
             modifiedAt
             status
             note
+            name
         }
     }
 `;
