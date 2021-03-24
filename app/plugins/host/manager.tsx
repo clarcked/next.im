@@ -20,7 +20,7 @@ const HostManager = (props: any) => {
         }
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="form pad not-pad-t grid-r-1-a">
+        <form onSubmit={handleSubmit(onSubmit)} className="form pad no-pad-t grid-r-1-a">
             <section>
                 <div className="margin-b">
                     <TextInput name="name" placeholder="Host Name" register={register} />

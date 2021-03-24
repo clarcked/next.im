@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { RiFolderSharedLine } from "react-icons/ri";
-import { BaseManager } from "../../core";
-import ProjectModel from "./model";
+import { MdEdit } from "react-icons/md";
 
 const ProjectCard = (props: any) => {
-    const { Model } = props;
-    const [projects, set_projects] = useState<any[]>([]);
-    const fetch = () => {
-        Model.list()
-            .then((res) => {})
-            .catch((e) => {});
-    };
-    useEffect(() => {
-        fetch();
-    }, []);
+    const { data: proj } = props;
     return (
-        <div className="card">
-            <div className="card-body">
-                <figure className="thumb outline">
-                    <img src="https://fakeimg.pl/600x600" alt="card image" />
-                </figure>
-                <div className="title txt-c">Project Name</div>
-                <div className="description txt-c">A quick description about.</div>
+        <div className="card card-overlay">
+            <div className="card-header">
+                <div className="actions">
+                    <a className="btn btn-icon circle">
+                        <MdEdit />
+                    </a>
+                </div>
             </div>
-            <div className="card-footer">
-                <section className="rows">
-                    <div className="col-auto">
-                        <button className="btn btn-">
-                            <RiFolderSharedLine />
-                        </button>
+            <div className="card-body">
+                <div className="title txt-">{proj?.name}</div>
+                <div className="description txt-">
+                    <div className="country">{proj?.country}</div>
+                    <div className="host">{proj?.host?.name}</div>
+                    <div className="collabs">
+                        <div className="rows gap">
+                            {proj?.collabs?.edges?.map((c, i) => {
+                                return (
+                                    <div key={i} className="col-auto">
+                                        <div className="collab">{c?.email}</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
-                </section>
+                </div>
             </div>
         </div>
     );
 };
 
-export default BaseManager(ProjectCard, { Model: ProjectModel });
+export default ProjectCard;

@@ -4,28 +4,27 @@ import ProjectModel from "./model";
 import ProjectCard from "./card";
 
 const ProjectList = (props: any) => {
-    const { Model, Card } = props;
+    const { list } = props;
     const [projects, set_projects] = useState<any>([]);
-    const fetch = () => {
-        Model.list()
-            .then((res) => {
-                set_projects(res?.edges);
-            })
-            .catch((e) => {});
+    const fetch = async () => {
+        const projs = await list();
+        set_projects(projs.edges);
     };
     useEffect(() => {
         fetch();
     }, []);
 
     return (
-        <div className="rows j-center gap pad scroll">
-            {projects?.edges?.map((project, idx) => (
-                <div key={idx} className="col-2">
-                    <Card data={project} />
-                </div>
-            ))}
+        <div className="pad h-expand">
+            <div className="rows gap scroll h-expand">
+                {projects?.map(({ node: project }, idx) => (
+                    <div key={idx} className="col-2">
+                        <ProjectCard data={project} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
 
-export default BaseManager(ProjectList, { Model: ProjectModel, Card: ProjectCard });
+export default BaseManager(ProjectList, { Model: ProjectModel });

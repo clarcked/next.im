@@ -58,7 +58,6 @@ export const GET_PROJECT_CATEGORIES = gql`
 export const GET_PROJECTS = gql`
     query GetProjects {
         projects {
-            totalCount
             edges {
                 node {
                     id
@@ -67,6 +66,31 @@ export const GET_PROJECTS = gql`
                     modifiedAt
                     status
                     note
+                    name
+                    country
+                    collabs {
+                        totalCount
+                        edges {
+                            node {
+                                id
+                                _id
+                                email
+                                iri
+                            }
+                        }
+                    }
+                    category {
+                        id
+                        _id
+                        name
+                    }
+                    host {
+                        id
+                        _id
+                        name
+                        ip
+                        region
+                    }
                 }
             }
         }
@@ -82,6 +106,31 @@ export const GET_PROJECT = gql`
             modifiedAt
             status
             note
+            name
+            country
+            collabs {
+                totalCount
+                edges {
+                    node {
+                        id
+                        _id
+                        email
+                        iri
+                    }
+                }
+            }
+            category {
+                id
+                _id
+                name
+            }
+            host {
+                id
+                _id
+                name
+                ip
+                region
+            }
         }
     }
 `;
