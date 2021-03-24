@@ -13,14 +13,14 @@ export function sanitize(obj: any) {
     return finalObj;
 }
 
-export function is_iri(id:string){
-    return new RegExp(`\/`).test(id)
+export function is_iri(id: string) {
+    return new RegExp(`\/`).test(id);
 }
 
 export function flink(file, scheme = "http") {
     return typeof file === "object" ? `${scheme}://${file?.host}/${file?.dir}/${file?.filename}` : file;
 }
 
-export function is_an_email(email: string) {
+export function is_valid_email(email: string) {
     return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
 }

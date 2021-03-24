@@ -40,8 +40,8 @@ const ProjectManager = (props: any) => {
             const categories = await Model.categories();
             const features = await Model.features();
             set_hosts(hosts?.edges);
-            set_features(features?.egdes);
-            set_categories(categories?.egdes);
+            set_features(features?.edges);
+            set_categories(categories?.edges);
         } catch (error) {
             console.log(error.message);
         }
@@ -49,9 +49,10 @@ const ProjectManager = (props: any) => {
 
     const onSubmit = async (data: any) => {
         try {
-            const resp = await submit(data);
-            console.log(resp);
-            return data;
+            Model?.get_collabs(data.collabs, async (teams) => {
+                const resp = await submit({ ...data, collabs: teams });
+                if (resp?.name) alert(`${resp?.name} created sucessfully!`);
+            });
         } catch (error) {
             console.warn(error.message);
         }
@@ -66,6 +67,12 @@ const ProjectManager = (props: any) => {
         if (collabs) {
             set_collabs(collabs.filter((c) => c !== key));
         }
+    };
+
+    const debug = async (data: any) => {
+        Model?.get_collabs(data.collabs, async (teams) => {
+            console.log({ ...data, collabs: teams });
+        });
     };
 
     useEffect(() => {
@@ -83,10 +90,10 @@ const ProjectManager = (props: any) => {
                         <Selector options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
                     </div>
                     <div className="col-auto">
-                        <Selector options={hosts} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
+                        <Selector options={hosts?.map(({ node }) => node)} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
                     </div>
                     <div className="col-auto">
-                        <Selector options={categories} map="id" Left={FaSlackHash} register={register} name="category" placeholder="Select Category" />
+                        <Selector options={categories?.map(({ node }) => node)} map="id" Left={FaSlackHash} register={register} name="category" placeholder="Select Category" />
                     </div>
                 </div>
                 <div className="margin-b">
@@ -95,11 +102,11 @@ const ProjectManager = (props: any) => {
                 </div>
                 <CollabFields fields={collabs} remove={rem_collab} register={register} />
                 <div className="checkboxes">
-                    {features?.map((feature, idx) => (
+                    {features?.map(({ node: feature }, idx) => (
                         <div key={idx} className="field checkbox">
                             <label>
                                 <input ref={register} type="checkbox" defaultValue={feature?.id} name="features[]" />
-                                <div className="label">{feature.name}</div>
+                                <div className="label">{feature?.name}</div>
                             </label>
                         </div>
                     ))}

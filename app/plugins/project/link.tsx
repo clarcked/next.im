@@ -12,4 +12,4 @@ const ProjectLink = (props: any) => {
     );
 };
 
-export default BaseLink(ProjectLink, { Manager: ProjectManager });
+export default BaseLink(ProjectLink, { Manager: ProjectManager, className: "w-35v" });

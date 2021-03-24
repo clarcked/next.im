@@ -12,4 +12,4 @@ const UserLink = (props: any) => {
     );
 };
 
-export default BaseLink(UserLink, { Manager: UserManager });
+export default BaseLink(UserLink, { Manager: UserManager, className: "w-35v" });

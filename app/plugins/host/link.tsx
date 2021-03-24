@@ -12,4 +12,4 @@ const HostLink = (props: any) => {
     );
 };
 
-export default BaseLink(HostLink, { Manager: HostManager });
+export default BaseLink(HostLink, { Manager: HostManager, className: "w-300" });

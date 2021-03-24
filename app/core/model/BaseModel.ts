@@ -3,8 +3,9 @@ import { ApolloClient } from "@apollo/client";
 import { createApolloClient } from "../providers/apollo";
 import merge from "deepmerge";
 import { is_iri } from "../utils";
-
+type QueryType = Array<{ name: string; value: string }>;
 export class BaseModel {
+    
     http: RestHttp;
     apollo: ApolloClient<any>;
     name: string;
@@ -24,7 +25,7 @@ export class BaseModel {
             "im-project-tag": tag || "main",
         };
 
-        this.http = new RestHttp({ ...rest, headers: merge(rest?.headers, headers) });
+        this.http = new RestHttp({ ...rest, headers: merge(rest?.headers || {}, headers) });
         this.apollo = createApolloClient({ ...graphql, headers: merge(graphql?.headers, headers) });
         this.tag = tag;
         this.name = name;
@@ -39,16 +40,37 @@ export class BaseModel {
         if (typeof arg === "object") this.data = arg;
     }
 
-    path() {
-        if (this.data.id) {
-            return is_iri(this.data?.id) ? this.data?.id : `/api/${this.name}${this.data?.id}`;
-        } else {
-            return `/api/${this.name}`;
+    path(query?: string, name?: string) {
+        let path = `/api/${name || this.name}`;
+        if (this.data?.id) {
+            path = is_iri(this.data?.id) ? this.data?.id : ` ${path}/${this.data?.id}`;
         }
+        if (query) {
+            path = `${path}?${query}`;
+        }
+        console.log(path, "base_model path");
+        return path;
     }
 
     error(e: any) {
         e && console.log(e.message);
+    }
+
+    build_query(args: QueryType) {
+        let query = "";
+        if (args) {
+            args?.map(({ name, value }, i) => {
+                query = `${query}${name}=${value}`;
+            });
+        }
+        console.log(query, "build_query");
+        return query;
+    }
+
+    async search(args: QueryType, name?: string, options?: any) {
+        console.log("searching entity", this.name);
+        let res = await this.http.query(this.path(this.build_query(args), name), options);
+        return res?.ok ? await res.json() : null;
     }
 
     async find(id: string) {
