@@ -15,14 +15,12 @@ const ProjectList = (props: any) => {
     }, []);
 
     return (
-        <div className="pad h-expand">
-            <div className="rows gap scroll h-expand">
-                {projects?.map(({ node: project }, idx) => (
-                    <div key={idx} className="col-2">
-                        <ProjectCard data={project} />
-                    </div>
-                ))}
-            </div>
+        <div className="rows gap">
+            {projects?.map(({ node: project }, idx) => (
+                <div key={idx} className="col-3">
+                    <ProjectCard {...props} data={project} />
+                </div>
+            ))}
         </div>
     );
 };

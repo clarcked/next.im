@@ -7,6 +7,8 @@ import { BaseManager } from "../../core";
 import ProjectModel from "./model";
 import { FaServer, FaSlackHash, FaUserPlus, FaUserShield } from "react-icons/fa";
 import { RiShieldFlashLine } from "react-icons/ri";
+import { isArray, isEmpty } from "lodash";
+import { reset } from "i18n-js";
 
 const CollabField = ({ register, remove, field }) => {
     return (
@@ -49,10 +51,11 @@ const ProjectManager = (props: any) => {
 
     const onSubmit = async (data: any) => {
         try {
-            Model?.get_collabs(data.collabs, async (teams) => {
-                const resp = await submit({ ...data, collabs: teams });
-                if (resp?.name) alert(`${resp?.name} created sucessfully!`);
-            });
+            let teams = await Model?.get_collabs(data?.collabs);
+            let next = { ...data, collabs: teams };
+            const resp = await submit(next);
+            if (resp?.name) alert(`${resp?.name} created sucessfully!`);
+            reset();
         } catch (error) {
             console.warn(error.message);
         }
@@ -70,9 +73,9 @@ const ProjectManager = (props: any) => {
     };
 
     const debug = async (data: any) => {
-        Model?.get_collabs(data.collabs, async (teams) => {
-            console.log({ ...data, collabs: teams });
-        });
+        let teams = await Model?.get_collabs(data?.collabs);
+        let next = { ...data, collabs: teams };
+        console.log(next, "debug project manager");
     };
 
     useEffect(() => {
@@ -80,20 +83,22 @@ const ProjectManager = (props: any) => {
     }, []);
 
     return (
-        <form className="pad no-pad-t form h-expand grid-r-1-a" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form h-expand grid-r-1-a" onSubmit={handleSubmit(onSubmit)}>
             <section className="scroll">
                 <div className="margin-b">
                     <TextInput register={register} name="name" placeholder="Project Name" />
                 </div>
-                <div className="margin-b rows gap flow-visible">
-                    <div className="col-auto">
-                        <Selector options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
-                    </div>
-                    <div className="col-auto">
-                        <Selector options={hosts?.map(({ node }) => node)} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
-                    </div>
-                    <div className="col-auto">
-                        <Selector options={categories?.map(({ node }) => node)} map="id" Left={FaSlackHash} register={register} name="category" placeholder="Select Category" />
+                <div className="margin-b ">
+                    <div className="grid-c gap flow-visible">
+                        <div className="col">
+                            <Selector options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
+                        </div>
+                        <div className="col">
+                            <Selector options={hosts?.map(({ node }) => node)} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
+                        </div>
+                        <div className="col">
+                            <Selector options={categories?.map(({ node }) => node)} map="id" Left={FaSlackHash} register={register} name="category" placeholder="Select Category" />
+                        </div>
                     </div>
                 </div>
                 <div className="margin-b">
@@ -105,7 +110,7 @@ const ProjectManager = (props: any) => {
                     {features?.map(({ node: feature }, idx) => (
                         <div key={idx} className="field checkbox">
                             <label>
-                                <input ref={register} type="checkbox" defaultValue={feature?.id} name="features[]" />
+                                <input ref={register} type="checkbox" defaultValue={feature?.id} name={`features[${idx}]`} />
                                 <div className="label">{feature?.name}</div>
                             </label>
                         </div>
@@ -127,23 +132,21 @@ const ProjectManager = (props: any) => {
                 </div>
             </section>
             <section>
-                <div className="margin-">
-                    <div className="rows">
-                        <div className="col-auto">
-                            <button type="reset" className="btn btn-icon">
-                                <MdRefresh />
-                            </button>
-                        </div>
-                        <div className="col">
-                            <div className="rows gap">
-                                <div className="col">
-                                    <button type="button" className="btn btn-icon" onClick={() => add_collab()}>
-                                        <FaUserPlus />
-                                    </button>
-                                </div>
-                                <div className="col">
-                                    <button className="btn">Create Project</button>
-                                </div>
+                <div className="rows a-center">
+                    <div className="col-4">
+                        <button type="reset" className="btn btn-icon">
+                            <MdRefresh />
+                        </button>
+                    </div>
+                    <div className="col-8">
+                        <div className="rows gap a-center j-right text-right">
+                            <div className="col">
+                                <button type="button" className="btn btn-icon" onClick={() => add_collab()}>
+                                    <FaUserPlus />
+                                </button>
+                            </div>
+                            <div className="col">
+                                <button className="btn">Create Project</button>
                             </div>
                         </div>
                     </div>

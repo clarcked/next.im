@@ -1,4 +1,4 @@
-import { isArray } from "lodash";
+import { isArray, isEmpty } from "lodash";
 import { BaseModel } from "../../core";
 import { GET_PROJECTS, GET_PROJECT_CATEGORIES, GET_PROJECT_HOSTS, GET_PROJECT_FEATURES } from "./queries";
 
@@ -10,19 +10,25 @@ export default class ProjectModel extends BaseModel {
         const res = await super.list(GET_PROJECTS);
         return res?.projects || {};
     }
-    async get_user(email: string, callback: (user) => void) {
+    async get_user(email: string) {
         const options = { headers: { Accept: "application/json", "im-project-tag": "main" } };
         const data = await super.search([{ name: "email", value: email }], "users", options);
         const user = isArray(data) ? data[0] : data;
-        callback(user);
+        return user;
     }
 
-    get_collabs(args: any[], callback: (arg) => void) {
-        let collabs = [];
-        if (isArray(args)) {
-            args?.forEach((collab) => this.get_user(collab?.email, (user) => user?.id && collabs.push({ ...collab, iri: `/api/user/${user?.id}` })));
-        }
-        callback(collabs);
+    async get_collabs(args: any[]) {
+        let collabs: any = [];
+        if (!isArray(args)) return collabs;
+        collabs = Promise.all(
+            args.map(async (arg) => {
+                const user = await this.get_user(arg?.email);
+                if (!user) return null;
+                const iri = `/api/users/${user.id}`;
+                return { ...arg, iri };
+            })
+        );
+        return collabs;
     }
     async categories() {
         const res = await super.list(GET_PROJECT_CATEGORIES);

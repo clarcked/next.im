@@ -23,7 +23,11 @@ const BaseLink = (Enhanced, options: any) =>
                     <Enhanced {...this.props} {...this.state} open={this.open.bind(this)} close={this.close.bind(this)} />
                     {is_open && (
                         <Modal className={className} is_open={is_open} close={this.close.bind(this)}>
-                            {Manager && <Manager {...this.props} />}
+                            {Manager && (
+                                <div className="pad no-pad-t h-expand">
+                                    <Manager {...this.props} />
+                                </div>
+                            )}
                         </Modal>
                     )}
                 </React.Fragment>

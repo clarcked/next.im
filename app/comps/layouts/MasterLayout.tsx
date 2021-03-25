@@ -90,7 +90,7 @@ class MasterLayout extends Component<any, any> {
                             </ul>
                         </nav>
                         <div className="h-expand grid-r-1-a">
-                            <div className="rows">{children}</div>
+                            {children}
                             <div className="footer wire-t">
                                 <div className="txt-sm">&copy; InMarketify 2021</div>
                             </div>
