@@ -8,6 +8,7 @@ import ProjectModel from "./model";
 import { FaServer, FaSlackHash, FaUserPlus, FaUserShield } from "react-icons/fa";
 import { RiShieldFlashLine } from "react-icons/ri";
 import { reset } from "i18n-js";
+import Loader from "../../comps/loader";
 
 const CollabField = ({ register, remove, field }) => {
     return (
@@ -28,7 +29,7 @@ const CollabField = ({ register, remove, field }) => {
 };
 const CollabFields = ({ fields, remove, register }) => (fields ? fields?.map((field, i) => <CollabField register={register} key={i} field={field} remove={remove} />) : <div />);
 const ProjectManager = (props: any) => {
-    const { submit, Model, mode, defaultValue } = props;
+    const { submit, Model, mode, defaultValue, is_loading } = props;
     const { handleSubmit, register } = useForm();
     const [collabs, set_collabs] = useState<Array<{ name: any }>>([]);
     const [hosts, set_hosts] = useState<any>([]);
@@ -151,6 +152,7 @@ const ProjectManager = (props: any) => {
                     </div>
                 </div>
             </section>
+            {is_loading && <Loader />}
         </form>
     );
 };

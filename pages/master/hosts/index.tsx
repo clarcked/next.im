@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { MasterLayout } from "../../app/comps/layouts";
-import { getConfigs } from "../../app/core/providers/app";
-import { HostList } from "../../app/plugins/host";
-import { UserLink } from "../../app/plugins/user";
+import { MasterLayout } from "../../../app/comps/layouts";
+import { getConfigs } from "../../../app/core/providers/app";
+import { HostList } from "../../../app/plugins/host";
+import { UserLink } from "../../../app/plugins/user";
 
 class Hosts extends Component {
     render() {

@@ -1,4 +1,5 @@
 import React from "react";
+import { sanitize } from "../utils";
 
 const BaseManager = (Enhanced, options: any) =>
     class extends React.Component<any, any> {
@@ -155,7 +156,8 @@ const BaseManager = (Enhanced, options: any) =>
         async submit(data: any) {
             const { selected } = this.state;
             const id = selected?.id || data?.id;
-            return id ? await this.update({ ...data, id }) : await this.create(data);
+            const pure = sanitize(data);
+            return id ? await this.update({ ...pure, id }) : await this.create(pure);
         }
 
         select(arg: any) {

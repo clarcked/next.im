@@ -5,7 +5,6 @@ import merge from "deepmerge";
 import { is_iri } from "../utils";
 type QueryType = Array<{ name: string; value: string }>;
 export class BaseModel {
-    
     http: RestHttp;
     apollo: ApolloClient<any>;
     name: string;
@@ -42,6 +41,7 @@ export class BaseModel {
 
     path(query?: string, name?: string) {
         let path = `/api/${name || this.name}`;
+        if (name) return path;
         if (this.data?.id) {
             path = is_iri(this.data?.id) ? this.data?.id : ` ${path}/${this.data?.id}`;
         }
