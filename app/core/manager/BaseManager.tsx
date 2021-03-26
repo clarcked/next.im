@@ -4,22 +4,28 @@ const BaseManager = (Enhanced, options: any) =>
     class extends React.Component<any, any> {
         constructor(props: any) {
             const { Model, Card, List } = options;
+            const { mode, defaultValue } = props;
             super(props);
             this.state = {
                 is_loading: false,
                 selected: null,
                 error: null,
                 dependencies: null,
+                mode: mode,
+                defaultValue: defaultValue,
                 Model: Model && new Model(props),
                 List: () => List && <List {...props} />,
                 Card: () => Card && <Card {...props} />,
             };
+            console.log(props, "debug base manager");
         }
+
         componentDidMount() {
             const { on_mount } = this.props;
             if (typeof on_mount === "function") {
             }
         }
+
         componentWillUnmount() {
             const { on_unmount } = this.props;
             if (typeof on_unmount === "function") {
@@ -146,9 +152,10 @@ const BaseManager = (Enhanced, options: any) =>
             }
         }
 
-        async submit(data: any, callback?: (arg?: any) => {}) {
+        async submit(data: any) {
             const { selected } = this.state;
-            return selected?.id ? await this.update({ ...data, ...selected }, callback) : await this.create(data, callback);
+            const id = selected?.id || data?.id;
+            return id ? await this.update({ ...data, id }) : await this.create(data);
         }
 
         select(arg: any) {
@@ -162,6 +169,8 @@ const BaseManager = (Enhanced, options: any) =>
         render() {
             return (
                 <Enhanced
+                    mode={this.state.mode}
+                    defaultValue={this.state.defaultValue}
                     Model={this.state.Model}
                     Card={this.state.Card}
                     List={this.state.List}

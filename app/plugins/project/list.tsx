@@ -17,7 +17,7 @@ const ProjectList = (props: any) => {
     return (
         <div className="rows gap">
             {projects?.map(({ node: project }, idx) => (
-                <div key={idx} className="col-3">
+                <div key={idx} className="w-150">
                     <ProjectCard {...props} data={project} />
                 </div>
             ))}

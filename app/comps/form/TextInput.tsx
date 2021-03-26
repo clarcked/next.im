@@ -4,10 +4,10 @@ import { TextInputType } from "./Input";
 
 class TextInput extends Component<TextInputType, any> {
     render() {
-        const { register, name, placeholder, type, className } = this.props;
+        const { defaultValue, register, name, placeholder, type, className } = this.props;
         return (
             <Input {...this.props}>
-                <input ref={register} placeholder={placeholder} className={`input ${className || ""}`} type={type || "text"} name={name}></input>
+                <input defaultValue={defaultValue} ref={register} placeholder={placeholder} className={`input ${className || ""}`} type={type || "text"} name={name}></input>
             </Input>
         );
     }

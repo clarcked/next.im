@@ -7,7 +7,6 @@ import { BaseManager } from "../../core";
 import ProjectModel from "./model";
 import { FaServer, FaSlackHash, FaUserPlus, FaUserShield } from "react-icons/fa";
 import { RiShieldFlashLine } from "react-icons/ri";
-import { isArray, isEmpty } from "lodash";
 import { reset } from "i18n-js";
 
 const CollabField = ({ register, remove, field }) => {
@@ -29,7 +28,7 @@ const CollabField = ({ register, remove, field }) => {
 };
 const CollabFields = ({ fields, remove, register }) => (fields ? fields?.map((field, i) => <CollabField register={register} key={i} field={field} remove={remove} />) : <div />);
 const ProjectManager = (props: any) => {
-    const { submit, Model } = props;
+    const { submit, Model, mode, defaultValue } = props;
     const { handleSubmit, register } = useForm();
     const [collabs, set_collabs] = useState<Array<{ name: any }>>([]);
     const [hosts, set_hosts] = useState<any>([]);
@@ -81,12 +80,12 @@ const ProjectManager = (props: any) => {
     useEffect(() => {
         fetch();
     }, []);
-
     return (
         <form className="form h-expand grid-r-1-a" onSubmit={handleSubmit(onSubmit)}>
+            <input ref={register} type="hidden" name="id" defaultValue={defaultValue?.id} />
             <section className="scroll">
                 <div className="margin-b">
-                    <TextInput register={register} name="name" placeholder="Project Name" />
+                    <TextInput defaultValue={defaultValue?.name} register={register} name="name" placeholder="Project Name" />
                 </div>
                 <div className="margin-b ">
                     <div className="grid-c gap flow-visible">
@@ -133,12 +132,12 @@ const ProjectManager = (props: any) => {
             </section>
             <section>
                 <div className="rows a-center">
-                    <div className="col-4">
+                    <div className="col-3">
                         <button type="reset" className="btn btn-icon">
                             <MdRefresh />
                         </button>
                     </div>
-                    <div className="col-8">
+                    <div className="col-9">
                         <div className="rows gap a-center j-right text-right">
                             <div className="col">
                                 <button type="button" className="btn btn-icon" onClick={() => add_collab()}>

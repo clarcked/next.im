@@ -14,8 +14,8 @@ class Project extends Component<any, any> {
                         <div className="col pad-5 scroll">
                             <ProjectList {...this.props} />
                         </div>
-                        <div className="col wire-l w-300 h-expand">
-                            <div className="profile grid-r-a-1 h-expand">
+                        <div className="col wire-l w-300 h-expand scroll">
+                            <div className="profile grid-r-a-1">
                                 <div className="profile-header">
                                     <div className="picture">
                                         <AvatarEditable />
@@ -26,8 +26,8 @@ class Project extends Component<any, any> {
                                     </div>
                                 </div>
                                 <section className="grid-r-1-a">
-                                    <div className="profile-body scroll pad">
-                                        <ProjectManager {...this.props} />
+                                    <div className="profile-body pad">
+                                        <ProjectManager {...this.props} mode="edit" defaultValue={{ name: "Test", id: "/api/projects/1" }} />
                                     </div>
                                     <div className="profile-footer"></div>
                                 </section>

@@ -4,10 +4,10 @@ import { TextInputType } from "./Input";
 
 class TextArea extends Component<TextInputType, any> {
     render() {
-        const { register, name, placeholder, className } = this.props;
+        const { defaultValue, register, name, placeholder, className } = this.props;
         return (
             <Input>
-                <textarea ref={register} placeholder={placeholder} className={`input ${className || ""}`} name={name}></textarea>
+                <textarea defaultValue={defaultValue} ref={register} placeholder={placeholder} className={`input ${className || ""}`} name={name}></textarea>
             </Input>
         );
     }

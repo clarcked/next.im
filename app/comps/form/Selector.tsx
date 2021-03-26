@@ -62,6 +62,8 @@ class Selector extends Component<TextInputType, { selected: any; is_open: boolea
         this.setState({ selected: null });
     }
     getName(item) {
+        const { defaultValue: defv } = this.props;
+        if (defv && !item) return defv?.name || defv?.title || defv?.username || defv?.email || defv?.id || defv;
         if (typeof item === "string") {
             return item;
         }

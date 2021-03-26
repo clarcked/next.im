@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 
-export type TextInputType = { Left?: any; Right?: any; map?: any; options?: any; children?: any; register?: any; name?: any; placeholder?: string; type?: string; className?: string };
+export type TextInputType = {
+    defaultValue?: any;
+    Left?: any;
+    Right?: any;
+    map?: any;
+    options?: any;
+    children?: any;
+    register?: any;
+    name?: any;
+    placeholder?: string;
+    type?: string;
+    className?: string;
+};
 class Input extends Component<TextInputType, any> {
     render() {
         const { options, Left, Right, children, className } = this.props;
