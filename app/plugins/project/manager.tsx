@@ -91,7 +91,7 @@ const ProjectManager = (props: any) => {
                 <div className="margin-b ">
                     <div className="grid-c gap flow-visible">
                         <div className="col">
-                            <Selector options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
+                            <Selector defaultValue={defaultValue?.country} options={["Argentina", "Haiti"]} Left={GiBlackFlag} register={register} name="country" placeholder="Select country" />
                         </div>
                         <div className="col">
                             <Selector options={hosts?.map(({ node }) => node)} map="id" Left={FaServer} register={register} name="host" placeholder="Select Host" />
